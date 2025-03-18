@@ -1,7 +1,7 @@
 from flask import Flask, request
 from message_interpreter import MessageReceiver
 from sender_message import SendMessage
-from crew import run
+from crewai import run
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def funcao():
     sender = SendMessage()
     sender.text(number=msg.phone, msg=str(resultado))
     print("Messagem enviada")
-    return ""
+    return "Evolution Iniciado"
 
 
 if __name__ == "__main__":

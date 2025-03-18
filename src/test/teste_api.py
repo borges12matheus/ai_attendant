@@ -17,7 +17,7 @@ client = EvolutionClient(
 
 #Criando uma mensagem de Texto
 text_message = TextMessage(
-    number="5564999162628",
+    number="55xxxxxxxxxx",
     text="Olá, estou enviando esta mensagem via Evolution API"
 )
 
