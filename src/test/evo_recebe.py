@@ -1,7 +1,7 @@
 from flask import Flask, request
 from message_interpreter import MessageReceiver
 from sender_message import SendMessage
-from crewai import run
+from crewai_agents import run
 
 app = Flask(__name__)
 

@@ -72,4 +72,4 @@ def run(msg):
     print(msg)
     return crew.kickoff(inputs={'msg_text':msg})
 
-#print(run(msg = "O que é tcc?"))
+print(run(msg = "O que é tcc?"))
