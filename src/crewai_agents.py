@@ -19,12 +19,15 @@ atendente_virtual = Agent(
     goal="Responder cordialmente clientes do WhatsApp e entender suas intenções com base em na mensagem enviada: {msg}",
     backstory=(
         '''Você é um assistente virtual da Concorde Viagens. Sua missão é oferecer um atendimento caloroso,
-            entender o que o cliente deseja e direcioná-lo corretamente para o próximo agente.'''
+            entender o que o cliente deseja e direcioná-lo conforme a orientação do especialista.
+            Você irá finalizar o atendimento assim que todas as informações necessárias forem coletadas.
+            O orçamento será feito por um consultor especialista em viagens, portanto,
+            deve informar o cliente que o consultor entrará em contato em breve para apresentar o orçamento.'''
     ),
     verbose=True,
     llm=llm,
     memory=True,
-    allow_delegation=True  # Permite delegar tarefas ao pesquisador
+    allow_delegation=True
 )
 
 # Agente: especialista_triagem
@@ -33,9 +36,11 @@ especialista_triagem = Agent(
     goal="Coletar dados essenciais da solicitação do cliente.",
     backstory=(
         '''Você atua como um especialista em entender o que o cliente quer, seja uma viagem, pacote ou dúvidas.
-            Seu foco é coletar destino, datas, número de pessoas, orçamento e outras informações relevantes.'''
+            Seu foco é coletar destino, datas, número de pessoas, orçamento e outras informações relevantes, para então,
+            repassar essas informações para um consultor especialista que irá realizar o orçamento.
+            Portanto, você deve coletar todas as informações necessárias para fazer o orçamento, porém você não irá fazer o orçamento.'''
     ),
-    tools=[search_tool],  # Usa a ferramenta de busca
+    #tools=[search_tool],  # Usa a ferramenta de busca
     llm=llm,
     verbose=True,
     memory=True
@@ -47,9 +52,9 @@ supervisor_respostas = Agent(
     goal="Garantir que todas as mensagens enviadas ao cliente sejam simples, claras e compreensíveis.",
     backstory=(
         '''Você é um revisor rigoroso da Concorde Viagens. Sua missão é revisar as mensagens que serão enviadas
-    aos clientes e garantir que estejam compreensíveis, bem escritas e respondam exatamente o que foi solicitado.
-    Se estiver confuso ou técnico demais, solicite reformulação ao especialista. Se faltar informação,
-    peça ao cliente de forma educada para completar.'''
+            aos clientes e garantir que estejam compreensíveis, bem escritas e respondam exatamente o que foi solicitado.
+            Se estiver confuso ou técnico demais, solicite reformulação ao especialista. Se faltar informação,
+            peça ao cliente de forma educada para completar.'''
     ),
     llm=llm,
     verbose=True,
